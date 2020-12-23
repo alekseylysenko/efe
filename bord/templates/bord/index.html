@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} Главная {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated == False %}
+<div class="row mt-4">
+    <p><a  class="btn btn-primary m-2" href="{% url 'login' %}">Вход</a></p>
+    <p><a class="btn m-2" href="{% url 'register' %}">Регистрация</a></p>
+</div>
+    {% else %}
+<p class="mt-2">
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Профиль {{user.username}}
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class=" w-25">
+      <p><a href="{% url 'profile' pk=user.id %}">Профиль</a></p>
+    <p><a href="{% url 'logout' %}">Выход</a></p>
+    <p><a href="{% url 'password_change_form' %}">Сменить пароль</a></p>
+
+  </div>
+</div>
+
+
+<div>
+    {% for post in posts %}
+    <a href="{% url 'bord:post_page' slug=post.slug %}">
+    <h1>
+        {{ post.title }}
+    </h1>
+    </a>
+    <p>{{ post.body }}</p>
+    {% endfor %}
+</div>
+    {% endif %}
+
+{% endblock %}

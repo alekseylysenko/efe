@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+<h1>Профиль пользователя <b>{{ user.user.username }}</b></h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            {% if user.photo.url != Null %}
+<img src="{{ user.photo.url }}" alt="photo" class="img-fluid ">
+            {% endif %}
+        </div>
+        <div class="col-md-8 justify-content-start">
+            <p class="mt-2">{{ user.user.first_name }} {{ user.user.last_name }}</p>
+            <p class="mt-2">Дата рождения: {{ user.date_of_birth }} </p>
+            <p>Навыки:</p>
+            <ul class="list-group list-group-flush">
+                {% for skill in user.skill.all %}
+                <li class="list-group-item">{{ skill.name }}</li>
+                {% endfor %}
+            </ul>
+            {% if request.user.id == user.user.id %}
+                <p class="mt-4"><a href="{% url 'edit' %}" class="btn btn-primary">Изменить</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

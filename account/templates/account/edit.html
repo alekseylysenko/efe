@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+Изменение данных пользователя {{ user.username }}
+<form action="" method="post" class="form mt-4" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+    <input type="submit" value="Изменить" class="btn btn-primary" onclick="{% url 'profile' pk=user.id %}">
+
+</form>
+{% endblock %}

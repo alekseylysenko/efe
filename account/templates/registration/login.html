@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-2">Вход на сайт!</h1>
+{% if form.errors %}
+<p>Ошибка авторизации!</p>
+{% endif %}
+
+<form action="{% url 'login' %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'bord:index' %}">
+    <p><input type="submit" value="Войти" class="btn btn-primary"></p>
+
+</form>
+ <p><a href="{% url 'password_reset' %}">Ввостановить пароль</a></p>
+{% endblock %}

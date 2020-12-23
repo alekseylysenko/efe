@@ -1,0 +1,1 @@
+web: gunicorn ustp3.wsgi:application
